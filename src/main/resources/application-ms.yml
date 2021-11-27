@@ -1,0 +1,91 @@
+#spring:
+#  shardingsphere:
+#    props:
+#      sql:
+#        show: true
+#    datasource:
+#      master0slave1:
+#        password: root
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/master0slave1
+#        username: root
+#      names: master0,master0slave0,master0slave1,master1,master1slave0,master1slave1
+#      master0:
+#        password: root
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/master0
+#        username: root
+#      master1:
+#        password: root
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/master1
+#        username: root
+#      master1slave1:
+#        password: root
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/master1slave1
+#        username: root
+#      master1slave0:
+#        password: root
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/master1slave0
+#        username: root
+#      master0slave0:
+#        password: root
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/master0slave0
+#        username: root
+#    sharding:
+##      默认数据源(ds0进行读写分离)
+#      default-data-source-name: ds1
+#      #默认分库规则
+#      default-database-strategy:
+#        inline:
+#          sharding-column: order_id
+#          algorithm-expression: t_order$->{order_id.hashCode() % 10}
+##        none:
+##          any:
+#      tables:
+#        t_order:
+##          key-generator:
+##            column: order_id
+##            type: SNOWFLAKE
+#          table-strategy:
+##            complex:
+##              sharding-columns: order_id,user_id
+##              algorithm-class-name: com.yl.shardingsphere.inline_demo.Config.SnoWalkerComplexShardingDB
+#            inline:
+#              sharding-column: order_id
+#              algorithm-expression: t_order$->{order_id.hashCode() % 10}
+#          actual-data-nodes: ds$->{0..1}.t_order$->{0..9}
+##          actual-data-nodes: ds0.t_order$->{0..9}
+#          database-strategy:
+#            inline:
+#              sharding-column: order_id
+#              algorithm-expression: ds$->{order_id.hashCode() % 2}
+##              algorithm-expression: ds0
+#      binding-tables: t_order
+##      broadcast-tables: t_test
+#      master-slave-rules:
+#        ds0:
+#          load-balance-algorithm-type: round_robin
+#          slave-data-source-names: master0slave0, master0slave1
+#          master-data-source-name: master0
+#        ds1:
+#          load-balance-algorithm-type: round_robin
+#          slave-data-source-names: master1slave0, master1slave1
+#          master-data-source-name: master1
+#
+#
+#
+#mybatis:
+#  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+#mybatis-plus:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.yl.shardingsphere.inline_demo.entity

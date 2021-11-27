@@ -1,0 +1,217 @@
+spring:
+  shardingsphere:
+    props:
+      sql:
+        show: true
+    datasource:
+      yl-ops0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops0?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      names: yl-ops0,yl-ops1,yl-ops2,yl-ops3,yl-ops4,yl-ops5,yl-ops6,yl-ops7,yl-ops8,yl-ops9
+      yl-ops1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops1?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops2:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops2?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops3:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops3?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops4:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops4?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops5:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops5?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops6:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops6?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops7:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops7?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops8:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops8?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+      yl-ops9:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.212:3306/yl_ops9?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: yldbuser
+        password: yldev-123
+    sharding:
+#      default-database-strategy:
+#        inline:
+#          sharding-column: id
+#          algorithm-expression: t_order$->{user_id % 10}
+      binding-tables:
+       - arrival_scan_list
+       - delivery_out_stock_list
+       - express_collection_list
+       - headless_register_list
+       - loading_scan_list
+       - pack_scan_list
+       - receipt_list
+       - remain_storage_scan_list
+       - send_scan_list
+       - signing_scan_list
+       - unloading_scan_list
+       - unpack_scan_list
+       - abnormal_piece_scan_list
+      tables:
+        abnormal_piece_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: abnormal_piece_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.abnormal_piece_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        arrival_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: arrival_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.arrival_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        delivery_out_stock_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: delivery_out_stock_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.delivery_out_stock_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        express_collection_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: express_collection_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.express_collection_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        headless_register_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: headless_register_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.headless_register_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        loading_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: loading_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.loading_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        pack_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: pack_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.pack_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        receipt_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: receipt_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.receipt_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        remain_storage_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: remain_storage_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.remain_storage_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        send_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: send_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.send_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        signing_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: signing_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.signing_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        unloading_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: unloading_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.unloading_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
+        unpack_scan_list:
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: unpack_scan_list$->{id.hashCode() % 10}
+          actual-data-nodes: yl-ops$->{0..9}.unpack_scan_list$->{0..9}
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: yl-ops$->{((id.hashCode()/10) as Long)  % 10}
