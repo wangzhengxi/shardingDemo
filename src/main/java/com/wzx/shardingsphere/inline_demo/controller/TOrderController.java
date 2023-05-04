@@ -10,12 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author wangzhengxi
- * @since 2019-05-23
+ * @title:
+ * @author: wzx
+ * @date: 2023/5/4 9:03 下午
+ * @version:  v1.0.0
  */
 @RestController
 @RequestMapping("/tOrder")
@@ -29,7 +27,7 @@ public class TOrderController {
             List<TOrder> tOrderList = new ArrayList<>();
             for (long i =0 ; i<100;i++){
                 TOrder tOrder = new TOrder();
-                tOrder.setOrderId("AAA"+1L+i);
+                tOrder.setOrderId("AAA"+i);
                 tOrder.setUserId(i);
                 tOrder.setStatus("状态"+i);
                 tOrderList.add(tOrder);

@@ -8,7 +8,7 @@
         <version>2.1.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.yl.shardingSphere</groupId>
+    <groupId>com.wzx.shardingSphere</groupId>
     <artifactId>inline_demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>inline_demo</name>
@@ -86,6 +86,7 @@
             <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
             <version>5.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
